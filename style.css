@@ -1,0 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --blob-fill: rgb(255, 255, 255);
+
+  --blob-seed: 123456;
+  --blob-num-points: 8;
+  --blob-variance: 0.375;
+  --blob-smoothness: 1;
+}
+body {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  /* -webkit-user-drag: auto; */
+  /* user-select: none; */
+  background-color: rgb(7, 7, 7);
+}
+.no-select {
+  user-select: none;
+}
+.worklet-canvas {
+  background-color: var(--blob-fill);
+  border-radius: 49% 51% 70% 30% / 30% 30% 70% 70%;
+}
+/* .worklet-canvas {
+  width: 75vmin;
+  height: 75vmin;
+  --blob-seed: var(--blob-seed);
+  --blob-num-points: var(--blob-num-points);
+  --blob-variance: var(--blob-variance);
+  --blob-smoothness: var(--blob-smoothness);
+  --blob-fill: #000;
+}  */
+
+/* backup code ↓ this one works */
+.worklet-canvas {
+  width: 70vmin;
+  height: 70vmin;
+  /* --blob-seed: 123456;  */
+  /* --blob-num-points: 8;
+  --blob-variance: 0.375;
+  --blob-smoothness: 1;
+  --blob-fill: #000; */
+}
+
+@supports (background: paint(blob)) {
+  .worklet-canvas {
+    background-color: transparent;
+    border-radius: 0;
+    background-image: paint(blob);
+  }
+}
+
+
+.slider-container {
+  width: 70vmin;
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+  background-color: rgb(206, 219, 253);
+}
+.slider-hitbox {
+  position: relative;
+  height: 25px;
+  width: 100%;
+  /* background-color: aquamarine; */
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  align-items: center;
+}
+.slider-bg {
+  position: absolute;
+  height: 10px;
+  background-color: rgb(134, 144, 177);
+  width: 100%;
+  pointer-events: none;
+}
+.slider-fg {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 0%;
+  height: 10px;
+  background-color: rgb(77, 95, 122);
+  pointer-events: none;
+  /* width: 100%; */
+
+}
+
+.circle {
+  border-radius: 100px;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  position: absolute;
+  right: -15px;
+  pointer-events: none;
+}
+
+
+/* cool config
+--blob-seed: 4038.87;
+--blob-num-points: 23;
+--blob-variance: 5.4375;
+--blob-smoothness: -17.3125; */

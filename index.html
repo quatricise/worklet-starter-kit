@@ -4,27 +4,69 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Worklet Starter Kit ✨</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      height: 100vh;
-      display: grid;
-      place-items: center;
-    }
-
-    .worklet-canvas {
-      width: 75vmin;
-      height: 75vmin;
-    }
-  </style>
+  <title>Worklet Starter Kit</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="timer">0</div>
+  <div class="slider-container">
+    <div class="indicator">
+      <span>0</span>
+    </div>
+    <div id="hitbox-seed" class="slider-hitbox">
+      <div class="slider-bg"></div>
+      <div class="slider-fg" id="bar-seed">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+  <div class="slider-container">
+    <div class="indicator">
+      <span>0</span>
+    </div>
+    <div id="hitbox-numpoints" class="slider-hitbox">
+      <div class="slider-bg"></div>
+      <div class="slider-fg" id="bar-numpoints">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+  <div class="slider-container">
+    <div class="indicator">
+      <span>0</span>
+    </div>
+    <div id="hitbox-variance" class="slider-hitbox">
+      <div class="slider-bg"></div>
+      <div class="slider-fg" id="bar-variance">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+  <div class="slider-container">
+    <div class="indicator">
+      <span>0</span>
+    </div>
+    <div id="hitbox-smoothness" class="slider-hitbox">
+      <div class="slider-bg"></div>
+      <div class="slider-fg" id="bar-smoothness">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+
   <div class="worklet-canvas"></div>
+  <audio id="audio1" src="audio/audio1.wav" controls ontimeupdate="onTimeUpdate()"></audio>
+  <script>
+    (async function () {
+      if (CSS["paintWorklet"] === undefined) {
+        await import("https://unpkg.com/css-paint-polyfill");
+      }
+      CSS.paintWorklet.addModule("./worklet.bundle.js");
+    })();
+
+    document.querySelector(".worklet-canvas").style.setProperty("--blob-seed", Math.random() * 10000);
+
+  </script>
+  <script src="slider.js"></script>
 </body>
 </html>
